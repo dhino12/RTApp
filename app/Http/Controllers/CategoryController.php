@@ -16,6 +16,11 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function getCategories()
+    {
+        return response()->json(Category::latest()->get());
+    }
+
     public function show()
     {
         

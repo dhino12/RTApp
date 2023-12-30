@@ -29,29 +29,31 @@
             {{ $gallery->title }}
         </h1>
         <div class="flex mx-auto justify-center gap-5 mb-3">
-            <p>By: 
+            <p>By:
                 <b><a href="/posts?author={{ $gallery->author->username }}">{{ $gallery->author->name }}</a></b>, 
             </p>
             <p class="font-medium">{{ $gallery->created_at->diffForHumans() }}</p>
         </div>
-        <p class="text-justify font-inter text-left text-lg">
-            {{-- {!! $gallery->body !!} --}}
-            {!!  $gallery->body  !!}
-        </p>
+        <div class="lg:w-3/4 mx-auto text-black text-sm md:text-base tracking-wide font-sans-serif">
+            <p class="">
+                {{-- {!! $gallery->body !!} --}}
+                {!!  $gallery->body  !!}
+            </p>
+        </div>
     </div>
 
-    <div class="p-5 sm:p-8  mx-auto">
-        <div class="columns-1 gap-5 sm:columns-1 md:columns-2 sm:gap-8 lg:columns-2 2xl:columns-3 [&>img:not(:first-child)]:mt-8">
+    <div class="p-5 sm:p-8 mt-8 md:mx-16 mx-auto">
+        <div class="columns-1 gap-5 sm:columns-1 md:columns-2 sm:gap-8 lg:columns-2 2xl:columns-sm [&>img:not(:first-child)]:mt-8">
             @foreach ($gallery->images as $image)
                 <a href="">
                     <div class="mb-4 rounded-lg overflow-hidden card-hover shadow-md shadow-gray-400 relative">
-                        <img src="{{ $image->name }}" class="h-full w-full object-cover object-center"/>
+                        <img src="/images/{{ $image->name }}" class="max-w-[100vh] h-full min-h-[55vh] max-h-[85vh] w-full object-cover object-center"/>
                         <div class="absolute bottom-0 bg-gradient-to-b from-slate-400/10 to-slate-900/80 w-full min-h-20 p-4 text-white">
                             <h2 class="font-bold text-xl">
                                 {{ $image->title }}
                             </h2>
                             <p class="line-clamp-2">
-                                {{ $image->description }}
+                                {!! $image->description !!}
                             </p>
                         </div>
                     </div>
@@ -79,6 +81,44 @@
         </a>
         @endif
     </div>
+    <script>
+    // Ambil semua elemen figure di dalam konten Trix Editor
+    const figureElements = document.querySelectorAll('figure');
+
+    // Iterasi melalui setiap elemen figure
+    figureElements.forEach((figureElement) => {
+        // Ambil data lampiran dari elemen figure
+        const attachmentData = JSON.parse(figureElement.getAttribute('data-trix-attachment'));
+
+        // Buat elemen embed
+        // const embeddedContent = document.createElement('object');
+        // const iframePDF = document.createElement('iframe');
+        const note = document.createElement('p');
+        note.innerText = "pastikan mematikan IDM / Downloader sejenis untuk dapat mereview PDF tanpa download";
+        note.setAttribute('class', 'text-center text-blue-500 font-semibold mt-2 capitalize')
+
+        // iframePDF.name = "viewer"
+        // iframePDF.src = attachmentData.url
+        // iframePDF.width = "100%"
+        // iframePDF.height = "100%"
+        // iframePDF.setAttribute('allowFullscreen', '')
+        // iframePDF.setAttribute('webkitallowfullscreen', '')
+
+        // embeddedContent.appendChild(iframePDF);
+        // embeddedContent.setAttribute("width", "100%")
+        // embeddedContent.setAttribute("height", "500px")
+        // embeddedContent.classList.add("mt-5")
+        // embeddedContent.data = attachmentData.url; // Gantilah ini sesuai dengan properti yang sesuai dengan URL konten yang akan disematkan
+        // embeddedContent.type = attachmentData.contentType; // Gantilah ini sesuai dengan tipe konten yang sesuai
+
+        if (attachmentData.contentType == 'application/pdf') {
+            // Ganti elemen figure dengan elemen embed
+            figureElement.parentNode.appendChild(note)
+            // figureElement.parentNode.replaceChild(embeddedContent, figureElement);
+        }
+    });
+
+    </script>
 </div>
 @endsection
 

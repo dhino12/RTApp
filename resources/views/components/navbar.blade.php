@@ -35,7 +35,9 @@
         class="p-5 justify-around lg:flex flex-col hidden lg:flex-row gap-5 lg:py-0"
         id="navbar-default"
     >
-        <span class="font-afacad text-xl">Tentang Kami</span>
+        <span class="font-afacad text-xl">
+            <a href="/#about-us">Tentang Kami</a>
+        </span>
         <span class="font-afacad text-xl">
             Syarat & Prosedur
         </span>

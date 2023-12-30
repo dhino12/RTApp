@@ -5,10 +5,12 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\AskedQuestions;
+use App\Models\Blogs;
 use App\Models\Category;
 use App\Models\CensusPopulation;
 use App\Models\GalleryActivities;
 use App\Models\Images;
+use App\Models\TemporaryImage;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,8 +30,10 @@ class DatabaseSeeder extends Seeder
         // ]);
         Category::factory(3)->create();
         Images::factory(3)->create();
+        TemporaryImage::factory(2)->create();
         CensusPopulation::factory(1)->create();
         AskedQuestions::factory(5)->create();
+        Blogs::factory(3)->create();
         GalleryActivities::factory(20)->create();
     }
 }

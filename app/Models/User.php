@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
     ];
 
@@ -43,7 +44,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function galleryActivities() {
-        return $this->hasMany(GalleryActivities::class);
+    public function images() {
+        return $this->hasOne(Images::class, 'users_id', 'id');
     }
 }

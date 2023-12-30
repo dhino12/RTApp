@@ -36,4 +36,17 @@ class GalleryActivities extends Model
     public function images() {
         return $this->hasMany(Images::class);
     }
+    
+    public function getRouteKeyName() {
+        return 'slug';
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            "slug" => [
+                "source" => "title",
+            ],
+        ];
+    }
 }

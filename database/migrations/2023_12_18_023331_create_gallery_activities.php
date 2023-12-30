@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('gallery_activities', function (Blueprint $table) {
             $table->id();
-            $table->string('category_id')->nullable();
+            $table->string('category_id');
             $table->string('user_id');
             $table->string('title');
             $table->text('slug');
             $table->text('body');
-            $table->string('publish_at')->nullable();
             $table->timestamps();
         });
     }

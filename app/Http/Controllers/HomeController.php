@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AskedQuestions;
+use App\Models\Blogs;
 use App\Models\Category;
 use App\Models\CensusPopulation;
 use App\Models\GalleryActivities;
@@ -16,6 +17,7 @@ class HomeController extends Controller
             "galleryActivities" => GalleryActivities::latest()->paginate(8)->withQueryString(),
             "askedQuestions" => AskedQuestions::latest()->paginate(8)->withQueryString(),
             "censusPopulation" => CensusPopulation::latest()->first(),
+            "blogs" => Blogs::latest()->paginate(14)->withQueryString(),
         ]);
     }
 }

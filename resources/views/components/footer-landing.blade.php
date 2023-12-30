@@ -1,5 +1,5 @@
 
-<div class="px-8 py-8 bg-slate-800 text-white border-t-4 border-cyan-400">
+<div class="px-8 py-8 bg-slate-800 text-white">
     <div class="container lg:max-w-6xl sm:mx-auto grid sm:grid-cols-2 gap-5">
         <div class="mb-5 lg:row-span-2 lg:mb-0">
             <h1 class="text-3xl text-gray-100 font-bold font-afacad mb-0.5 capitalize">Informasi Warga</h1>

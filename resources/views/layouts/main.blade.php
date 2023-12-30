@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth scroll-pt-32">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +23,9 @@
         <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
         <script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>
         <style type="text/tailwindcss">
+            h1 {
+                @apply text-4xl;
+            }
             .item .activeIcon {
                 @apply hidden;
             }
@@ -152,6 +155,7 @@
                     extend: {
                         fontFamily: {
                             afacad: ["Afacad"],
+                            'sans-serif': ['sans-serif']
                         },
                         animation: {
                             "bounce-slow": "bounce 3s ease-in-out infinite",
@@ -182,7 +186,7 @@
             };
         </script>
     </head>
-    <body>
+    <body class="bg-slate-100">
         <header>
             @yield('header')
         </header>
@@ -268,8 +272,8 @@
                 },
                 searching: false,
                 aoColumns: [
-                    { "sWidth": "95px", "sClass": " font-afacad text-center" },
-                    { "sWidth": "95px", "sClass": " font-afacad text-center" },
+                    { "sWidth": "95px", "sClass": " font-sans-serif text-center" },
+                    { "sWidth": "95px", "sClass": " font-sans-serif text-center" },
                 ],
                 dom:'rtip'
             });

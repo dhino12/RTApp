@@ -3,12 +3,16 @@
     addEventListener("trix-file-accept", function(event) {
         // Prevent attaching .png files
         if (event.file.type === "application/pdf") {
-            alert("Menambahkan pdf mungkin tidak terlihat langsung")
-            event.preventDefault()
+            // alert("Menambahkan pdf mungkin tidak terlihat langsung")
+            // event.preventDefault()/
         }
       
-        // Prevent attaching files > 1024 bytes
-        if (event.file.size > 50000) {
+        /**
+         * Prevent attaching files > 1024 bytes
+         * Convert MB to Bytes
+         * https://www.coolstuffshub.com/id/penyimpanan-data/mengkonversi/megabyte-ke-byte/
+         */
+        if (event.file.size > 50_000_000) {
             event.preventDefault();
             alert("File to large, max size 50mb")
         }
@@ -59,7 +63,14 @@
         }
  
         function setAttributes(attributes) {
-            attachment.setAttributes(attributes)
+            if (attributes.type == 'application/pdf') {
+                attachment.setAttributes({ 
+                    content: `<iframe src="${attributes.href}" onerror="" frameborder="0" allowfullscreen class="w-full h-[66vh]"></iframe>`,
+                    ...attributes,
+                });
+            } else {
+                attachment.setAttributes(attributes);
+            }
         }
     }
  
@@ -78,7 +89,8 @@
         xhr.addEventListener("load", function(event) {
             var attributes = {
                 url: xhr.responseText,
-                href: xhr.responseText + "?content-disposition=attachment"
+                href: xhr.responseText + "?content-disposition=attachment",
+                type: file.type
             }
             successCallback(attributes)
         })
@@ -105,4 +117,34 @@
         return '';
     }
 
+    /**
+     * Embed video / file pdf
+     */
+    const button = document.createElement('button')
+    button.innerText = "embed"
+    button.id = "embedVideo"
+    button.setAttribute('class', 'text-black border border-slate-600 px-2 py-1 mt-2')
+    document.querySelector(".trix-dialog__link-fields").insertAdjacentElement('afterend', button);
+    document.querySelector("#embedVideo").addEventListener('click', (e) => {
+        e.preventDefault();
+        const inputLink = document.querySelector('input.trix-input--dialog').value
+        let link = ''
+
+        if (inputLink.includes('youtu')) {
+            let videoMatch = inputLink.match(/[?&]v=([^&]+)/);
+            videoMatch = videoMatch ? videoMatch[1] : inputLink.split('/')[inputLink.split('/').length - 1];
+            link = `https://www.youtube.com/embed/${videoMatch}`
+        } 
+        if (inputLink.includes('drive.google.com')) {
+            link = `https://drive.google.com/file/d/${inputLink.match(/\/file\/d\/(.+?)\//)[1]}/preview`
+        }
+        
+        const attachment = new Trix.Attachment({content: `<iframe src="${link}" frameborder="0" allowfullscreen class="w-full h-[66vh]"></iframe>`});
+        document.querySelector('trix-editor').editor.insertAttachment(attachment);
+
+        document.querySelector("#embedVideo").classList.add('bg-lime-500')
+        setTimeout(() => {
+            document.querySelector("#embedVideo").classList.remove('bg-lime-500')
+        }, 2000);
+    })
 })();

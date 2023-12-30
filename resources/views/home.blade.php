@@ -50,7 +50,7 @@
             <div class="mx-auto text-center">
                 <span class="material-symbols-outlined text-3xl px-3 py-2 rounded-2xl shadow-lg bg-gradient-to-r from-cyan-400 to-blue-600 text-white">holiday_village</span>
             </div>
-            <h1 class="font-bold text-3xl font-afacad text-center bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent lg:text-4xl">
+            <h1 id="about-us" class="font-bold text-3xl font-afacad text-center bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent lg:text-4xl">
                 Tentang Kami
             </h1>
             <h2 class="font-semibold text-center text-2xl font-afacad">Lingkungan</h2>
@@ -165,7 +165,7 @@
                         <div class="item hover:shadow-lg hover:scale-105 transition-all rounded-lg overflow-hidden">
                             <div class="header p-6 bg-slate-200 font-bold flex justify-between items-center cursor-pointer rounded-lg">
                                 <div>
-                                    <h2>{{ $question->title }}.</h2>
+                                    <h2>{{ $question->title }}</h2>
                                 </div>
                                 
                                 <span class="activeIcon material-symbols-outlined">keyboard_arrow_down</span>
@@ -179,7 +179,9 @@
                         </div>
                     @endforeach
                 </div>
-                <button class="block mx-auto mt-5 px-4 py-3 shadow-md active:scale-[0.95] hover:scale-[1.05] transition-all text-white font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg uppercase">Selengkapnya</button>
+                <a href="/faqs">
+                    <button class="block mx-auto mt-5 px-4 py-3 shadow-md active:scale-[0.95] hover:scale-[1.05] transition-all text-white font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg uppercase">Selengkapnya</button>
+                </a>
             </div>
         </div>
         <div class="pt-20 lg:max-w-7xl lg:mx-auto">
@@ -199,7 +201,7 @@
                         "data" => $galleryActivities[0],
                     ])
                     <div class="sm:row-span-2 lg:row-span-3">
-                        <a href="/post/{{ $galleryActivities[0]->slug }}" class="block relative z-10 card-hover rounded-2xl overflow-hidden mb-3">
+                        <a href="/post/gallery/{{ $galleryActivities[0]->slug }}" class="block relative z-10 card-hover rounded-2xl overflow-hidden mb-3">
                             <div class="bg-gradient-to-b from-slate-400 to-slate-900 h-96 md:h-[84vh]">
                                 <img src="https://source.unsplash.com/1000x600?flat" alt="" class="mix-blend-overlay w-full h-full object-cover">
                             </div>
@@ -212,7 +214,7 @@
                                 </p>
                             </div>
                         </a>
-                        <a href="/post/{{ $galleryActivities[1]->slug }}" class="block relative card-hover rounded-2xl overflow-hidden">
+                        <a href="/post/gallery/{{ $galleryActivities[1]->slug }}" class="block relative card-hover rounded-2xl overflow-hidden">
                             <div class="bg-gradient-to-b from-slate-400 to-slate-900 h-96 md:h-[70vh]">
                                 <img src="https://source.unsplash.com/1000x600?indonesia" alt="" class="mix-blend-overlay w-full h-full object-cover">
                             </div>
@@ -263,81 +265,35 @@
             </div>
             <div class="mx-auto lg:px-5 mt-5">
                 <div class="flex flex-wrap lg:grid lg:grid-cols-4 justify-center gap-4 items-center">
-                    <div class="max-w-[18rem] sm:max-w-[22rem] max-h-80 mb-12 transition-all hover:scale-[1.02]">
-                        <div class="h-56 bg-red-200">
-                            <img src="https://source.unsplash.com/1000x600?football" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
-                        </div>
-                        <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
-                            <span>
-                                <h2 class="mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">Title article</h2>
-                                <p class="text-slate-600 text-justify line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, a?</p>
-                            </span>
-                            <button class="font-semibold font-afacad text-blue-500 text-xl mt-2 mb-0 flex items-center justify-between w-full">Baca Selengkapnya
-                                <span class="activeIcon material-symbols-outlined">keyboard_arrow_right</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="max-w-[18rem] sm:max-w-[22rem] max-h-80 mb-12 transition-all hover:scale-[1.02]">
-                        <div class="h-56 bg-red-200">
-                            <img src="https://source.unsplash.com/1000x600?indonesia" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
-                        </div>
-                        <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
-                            <span>
-                                <h2 class="mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">Title article</h2>
-                                <p class="text-slate-600 text-justify line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, a?</p>
-                            </span>
-                            <button class="font-semibold font-afacad text-blue-500 text-xl mt-2 mb-0 flex items-center justify-between w-full">Baca Selengkapnya
-                                <span class="activeIcon material-symbols-outlined">keyboard_arrow_right</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="max-w-[18rem] sm:max-w-[22rem] max-h-80 mb-12 transition-all hover:scale-[1.02]">
-                        <div class="h-56 bg-red-200">
-                            <img src="https://source.unsplash.com/1000x600?anime" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
-                        </div>
-                        <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
-                            <span>
-                                <h2 class="mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">Title article</h2>
-                                <p class="text-slate-600 text-justify line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, a?</p>
-                            </span>
-                            <button class="font-semibold font-afacad text-blue-500 text-xl mt-2 mb-0 flex items-center justify-between w-full">Baca Selengkapnya
-                                <span class="activeIcon material-symbols-outlined">keyboard_arrow_right</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="max-w-[18rem] sm:max-w-[22rem] max-h-80 mb-12 transition-all hover:scale-[1.02]">
-                        <div class="h-56 bg-red-200">
-                            <img src="./img/elysia_10.jpg" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
-                        </div>
-                        <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
-                            <span>
-                                <h2 class="mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">Title article</h2>
-                                <p class="text-slate-600 text-justify line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, a?</p>
-                            </span>
-                            <button class="font-semibold font-afacad text-blue-500 text-xl mt-2 mb-0 flex items-center justify-between w-full">Baca Selengkapnya
-                                <span class="activeIcon material-symbols-outlined">keyboard_arrow_right</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="max-w-[18rem] sm:max-w-[22rem] max-h-80 mb-12 transition-all hover:scale-[1.02]">
-                        <div class="h-56 bg-red-200">
-                            <img src="https://source.unsplash.com/1000x600?design" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
-                        </div>
-                        <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
-                            <span>
-                                <h2 class="mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">Title article</h2>
-                                <p class="text-slate-600 text-justify line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, a?</p>
-                            </span>
-                            <button class="font-semibold font-afacad text-blue-500 text-xl mt-2 mb-0 flex items-center justify-between w-full">Baca Selengkapnya
-                                <span class="activeIcon material-symbols-outlined">keyboard_arrow_right</span>
-                            </button>
-                        </div>
-                    </div>
+                    @foreach ($blogs as $blog)
+                        <a href="/post/blog/{{ $blog->slug }}">
+                            <div class="max-w-[18rem] sm:max-w-[22rem] mb-12 transition-all hover:scale-[1.02]">
+                                <div class="h-56 bg-red-200">
+                                    <img src="https://source.unsplash.com/1000x600?football" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
+                                </div>
+                                <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
+                                    <span>
+                                        <h2 class="min-h-[4rem] mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">
+                                            {{ $blog->title }}
+                                        </h2>
+                                        <p class="text-justify line-clamp-3 font-sans-serif">
+                                            {{ strip_tags($blog->body) }}
+                                        </p>
+                                    </span>
+                                    <button class="font-semibold font-afacad text-blue-500 text-xl mt-2 mb-0 flex items-center justify-between w-full">Baca Selengkapnya
+                                        <span class="activeIcon material-symbols-outlined">keyboard_arrow_right</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
                 </div>
             </div>
-            <button class="block mx-auto mt-5 px-4 py-3 shadow-md active:scale-[0.95] hover:scale-[1.05] transition-all text-white font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg uppercase">Selengkapnya</button>
+            <a href="/posts/blog">
+                <button class="block mx-auto mt-5 px-4 py-3 shadow-md active:scale-[0.95] hover:scale-[1.05] transition-all text-white font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg uppercase">Selengkapnya</button>
+            </a>
         </div>
-        <div id="contact" class="mt-20 mb-20 lg:max-w-7xl lg:mx-auto">
+        <div id="contact" class="mt-20 pb-20 lg:max-w-7xl lg:mx-auto">
             <div class="mx-8 sm:mx-auto sm:w-3/4 lg:w-[105vh]">
                 <blockquote class="block text-center font-bold font-afacad text-3xl mb-2 lg:text-4xl">Butuh Bantuan <span class="inline-block animate-bounce">?</span></blockquote>
                 <p class="after:content-['”'] before:content-['”'] w-2/3 mx-auto text-center">Terkendala atau pertanyaan? Jangan ragu untuk menghubungi kami. Kami di sini untuk membantu 📧📞</p>
@@ -355,7 +311,7 @@
                         </div>
                         <div>
                             <label for="description" class="block">Apa yang bisa dibantu ?</label>
-                            <textarea name="description" id="description" cols="50" rows="10" class="w-full border-2 border-slate-200 shadow-sm rounded-md py-2 px-2" placeholder="?? ....."></textarea>
+                            <textarea name="description" id="description" cols="50" rows="8" class="w-full border-2 border-slate-200 shadow-sm rounded-md py-2 px-2" placeholder="?? ....."></textarea>
                         </div>
                         <button class="block mx-auto mt-5 px-4 py-3 shadow-md active:scale-[0.95] hover:scale-[1.05] transition-all text-white font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg uppercase">
                             📩 Kirim
@@ -369,7 +325,7 @@
         function counterAnimate(item, total, targetClass) {
                 const targetElement = document.querySelectorAll(targetClass)[item];
                 let upTo = 0
-                let counts = setInterval(updated);
+                let counts = setInterval(updated, 20);
                 function updated() {
                     targetElement.innerHTML = ++upTo
                     if (upTo == total) {

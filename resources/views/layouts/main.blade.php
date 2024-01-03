@@ -26,6 +26,13 @@
             h1 {
                 @apply text-4xl;
             }
+            ol {
+                list-style-type: auto;
+                margin-left: 2.5vh
+            }
+            ul {
+                list-style-type: auto;
+            }
             .item .activeIcon {
                 @apply hidden;
             }

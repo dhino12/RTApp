@@ -42,7 +42,7 @@ class DashboardGalleryController extends Controller
     {
         $validateData = Validator::make($request->all(), [
             "title" => ["required", "max:255"],
-            "slug" => ["required", "unique:blogs"],
+            "slug" => ["required", "unique:gallery_activities"],
             "category_id" => ["required"],
             "body" => ["required"],
         ]);
@@ -61,7 +61,7 @@ class DashboardGalleryController extends Controller
         }
         $validateData = $validateData->validate();
         $validateData["user_id"] = auth()->user()->id;
-        $blog = GalleryActivities::create($validateData);
+        $gallery = GalleryActivities::create($validateData);
 
         /**
          * Upload Image
@@ -76,7 +76,7 @@ class DashboardGalleryController extends Controller
             );
             Images::create([
                 "name" => $temporaryImage->folder . '/' . $temporaryImage->name,
-                "blogs_id" => $blog->id,
+                "gallery_activities_id" => $gallery->id,
             ]);
             Storage::deleteDirectory("tmp/images/" . $temporaryImage->folder);
             $temporaryImage->delete();
@@ -92,7 +92,7 @@ class DashboardGalleryController extends Controller
             Storage::deleteDirectory("tmp/uploads/" . auth()->user()->username);
         }
  
-        return redirect("/dashboard/gallery")->with("success", "New Post Blog has been added! ");
+        return redirect("/dashboard/gallery")->with("success", "New Post Gallery has been added! ");
     }
 
     /**
@@ -173,7 +173,7 @@ class DashboardGalleryController extends Controller
             Storage::deleteDirectory("tmp/uploads/" . auth()->user()->username);
         }
  
-        return redirect("/dashboard/gallery")->with("success", "Post Blog has been Edited! ");
+        return redirect("/dashboard/gallery")->with("success", "Post Gallery has been Edited! ");
     }
 
     /**
@@ -187,6 +187,7 @@ class DashboardGalleryController extends Controller
                 File::deleteDirectory(public_path('images/' . explode("/", $image->name)[0]));
             }
         }
+        Images::where('gallery_activities_id', $gallery->id)->delete();
         GalleryActivities::destroy($gallery->id);
 
         /**
@@ -201,7 +202,7 @@ class DashboardGalleryController extends Controller
             }
         }
 
-        return redirect("/dashboard/gallery")->with("success", "Post Blog " . $gallery->title . " has been deleted! ");
+        return redirect("/dashboard/gallery")->with("success", "Post Gallery " . $gallery->title . " has been deleted! ");
     }
 
     public function checkSlug(Request $request) 

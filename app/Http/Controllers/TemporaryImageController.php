@@ -15,7 +15,6 @@ class TemporaryImageController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response()->json($request);
         // return response()->json($request);
         if ($request->hasFile('images')) {
             $image = $request->file("images");

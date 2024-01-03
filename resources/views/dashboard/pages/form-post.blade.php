@@ -7,11 +7,12 @@
     <div class="px-6">
         @include('dashboard/components/navbar')
     </div>
+    
     <!-- cards row 4 -->
     <div class="px-6 py-7 my-10 shadow-soft-sm lg:w-9/12 mx-10 md:mx-auto rounded-xl bg-white">
         <h1 class="text-xl font-bold font-sans-serif capitalize">Tambah {{ request()->segment(2) }}</h1>
         <p>Form Tambah {{ request()->segment(2) }}</p>
-        <form action="/dashboard/blogs/" method="post" enctype="multipart/form-data" class="flex justify-center flex-col my-5 gap-5 w-full">
+        <form action="{{ str_replace('/create', '', Request::getRequestUri()) }}" method="post" enctype="multipart/form-data" class="flex justify-center flex-col my-5 gap-5 w-full">
             @csrf
             <div class="flex gap-5">
                 <div class="w-full">

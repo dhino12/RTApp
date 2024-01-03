@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\Dashboard\DashboardBlogsController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DashboardGalleryController;
 use App\Http\Controllers\Dashboard\DashboardProfileController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Dashboard\ImageController;
+use App\Http\Controllers\Dashboard\ImageController; 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RegisterController;
@@ -49,24 +50,25 @@ Route::post("/logout", [LoginController::class, 'logout']);
 Route::get("/dashboard", [DashboardController::class, 'index'])->middleware('auth');
 
 Route::resource("/dashboard/blogs", DashboardBlogsController::class)->middleware('auth');
-Route::delete("/delete-file", [ImageController::class, 'deleteFilePond']);
-Route::put("/update-file", [ImageController::class, 'updateFilePondDescription']);
-Route::post("/upload-trix", [ImageController::class, 'uploadTrix']);
-Route::delete("/destroy-trix", [ImageController::class, 'deleteTrix']);
+Route::delete("/delete-file", [ImageController::class, 'deleteFilePond'])->middleware('auth');
+Route::put("/update-file", [ImageController::class, 'updateFilePondDescription'])->middleware('auth');
+Route::post("/upload-trix", [ImageController::class, 'uploadTrix'])->middleware('auth');
+Route::delete("/destroy-trix", [ImageController::class, 'deleteTrix'])->middleware('auth');
 
-Route::resource("/dashboard/gallery", DashboardGalleryController::class);
-Route::get("/dashboard/profile", [DashboardProfileController::class, 'index']);
-Route::put("/dashboard/profile/{user:id}", [DashboardProfileController::class, 'update']);
-Route::delete("/dashboard/profile/{user:id}", [DashboardProfileController::class, 'destroy']);
-Route::get("/dashboard/about", function () {
-    return view("dashboard/pages/about");
-});
+Route::resource("/dashboard/gallery", DashboardGalleryController::class)->middleware('auth');
 
-Route::post("/upload", TemporaryImageController::class);
-Route::post("/upload-force", [TemporaryImageController::class, 'uploadForceDb']);
-Route::delete("/delete", [TemporaryImageController::class, 'destroy']);
-Route::delete("/delete-tmp", [TemporaryImageController::class, 'destroyByUserId']);
-Route::delete("/delete-force", [TemporaryImageController::class, 'destroyForceDb']);
+Route::get("/dashboard/profile", [DashboardProfileController::class, 'index'])->middleware('auth');
+Route::put("/dashboard/profile/{user:id}", [DashboardProfileController::class, 'update'])->middleware('auth');
+Route::delete("/dashboard/profile/{user:id}", [DashboardProfileController::class, 'destroy'])->middleware('auth');
+
+Route::get("/dashboard/about", [DashboardAboutController::class, 'index'])->middleware('auth');
+Route::put("/dashboard/about/{blog:id}", [DashboardAboutController::class, 'update'])->middleware('auth');
+
+Route::post("/upload", TemporaryImageController::class)->middleware('auth');
+Route::post("/upload-force", [TemporaryImageController::class, 'uploadForceDb'])->middleware('auth');
+Route::delete("/delete", [TemporaryImageController::class, 'destroy'])->middleware('auth');
+Route::delete("/delete-tmp", [TemporaryImageController::class, 'destroyByUserId'])->middleware('auth');
+Route::delete("/delete-force", [TemporaryImageController::class, 'destroyForceDb'])->middleware('auth');
 
 /**
  * API Utility

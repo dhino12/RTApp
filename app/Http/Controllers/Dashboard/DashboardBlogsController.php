@@ -110,6 +110,7 @@ class DashboardBlogsController extends Controller
      */
     public function edit(Blogs $blog)
     {
+        $this->authorize('update', $blog);
         return view("/dashboard/pages/form-edit", [
             "categories" => Category::all(),
             "post" => $blog
@@ -183,11 +184,13 @@ class DashboardBlogsController extends Controller
      */
     public function destroy(Blogs $blog)
     {
+        $this->authorize('delete', $blog);
         if (!empty($blog->images)) {
             foreach ($blog->images as $image) {
                 File::deleteDirectory(public_path('images/' . explode("/", $image->name)[0]));
             }
         }
+        Images::where('blogs_id', $blog->id)->delete();
         Blogs::destroy($blog->id);
 
         /**

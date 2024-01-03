@@ -58,7 +58,11 @@
             <div>
                 <label for="category_id" class="font-semibold">Category <span class="text-red-500 font-bold">*</label>
                 <span class="text-red-500 block">Tolong isikan category, agar postingan rapih terkelompok</span>
-                <select name="category_id" id="category_id" class="w-full choice" placeholder="Category" required></select>
+                <select name="category_id" id="category_id" class="w-full choice" placeholder="Category" required>
+                    @if (old('category_id') == $post->category->id)
+                        <option value="{{ $post->category->id }}" selected>{{ $post->category->title }}</option>
+                    @endif
+                </select>
                 @error('category_id')
                     <div class="text-red-500 font-bold">
                         {{ $message }}

@@ -90,34 +90,14 @@
         // Ambil data lampiran dari elemen figure
         const attachmentData = JSON.parse(figureElement.getAttribute('data-trix-attachment'));
 
-        // Buat elemen embed
-        // const embeddedContent = document.createElement('object');
-        // const iframePDF = document.createElement('iframe');
         const note = document.createElement('p');
         note.innerText = "pastikan mematikan IDM / Downloader sejenis untuk dapat mereview PDF tanpa download";
         note.setAttribute('class', 'text-center text-blue-500 font-semibold mt-2 capitalize')
 
-        // iframePDF.name = "viewer"
-        // iframePDF.src = attachmentData.url
-        // iframePDF.width = "100%"
-        // iframePDF.height = "100%"
-        // iframePDF.setAttribute('allowFullscreen', '')
-        // iframePDF.setAttribute('webkitallowfullscreen', '')
-
-        // embeddedContent.appendChild(iframePDF);
-        // embeddedContent.setAttribute("width", "100%")
-        // embeddedContent.setAttribute("height", "500px")
-        // embeddedContent.classList.add("mt-5")
-        // embeddedContent.data = attachmentData.url; // Gantilah ini sesuai dengan properti yang sesuai dengan URL konten yang akan disematkan
-        // embeddedContent.type = attachmentData.contentType; // Gantilah ini sesuai dengan tipe konten yang sesuai
-
         if (attachmentData.contentType == 'application/pdf') {
-            // Ganti elemen figure dengan elemen embed
             figureElement.parentNode.appendChild(note)
-            // figureElement.parentNode.replaceChild(embeddedContent, figureElement);
         }
     });
-
     </script>
 </div>
 @endsection

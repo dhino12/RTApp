@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\About;
 use App\Models\AskedQuestions;
 use App\Models\Blogs;
 use App\Models\Category;
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        About::factory(1)->create();
         Category::factory(3)->create();
         Images::factory(3)->create();
         TemporaryImage::factory(2)->create();

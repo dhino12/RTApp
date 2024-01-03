@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Blogs;
 use App\Models\GalleryActivities;
+use App\Models\Images;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,32 +43,29 @@ class DashboardProfileController extends Controller
     {
         $blogs = Blogs::where('user_id', $user->id)->get();
         $galleries = GalleryActivities::where('user_id', $user->id)->get();
-
+        // return response()->json($blogs[0]->images);
         if (!empty($user->images)) {
-            foreach ($user->images as $image) {
-                File::deleteDirectory(public_path('images/' . explode("/", $image->name)[0]));
-                $image->destroy();
-            }
-            foreach ($galleries->images as $image) {
-                File::deleteDirectory(public_path('images/' . explode("/", $image->name)[0]));
-                $image->destroy();
-            }
-            if ($blogs->images[0]) {
-                File::deleteDirectory(public_path('uploads/' . explode('/', $blogs->images[0]->name)[0]));
-            }
-            foreach ($blogs->images as $image) {
-                $image->destroy();
-            }
-
-            foreach ($galleries as $gallery) {
-                $gallery->destroy();
-            }
-            foreach ($blogs as $blog) {
-                $blog->destroy();
-            }
-
-            User::destroy($user->id);
+            File::deleteDirectory(public_path('images/' . explode("/", $user->images->name)[0]));
+            $user->images->delete();
         }
+        File::deleteDirectory(public_path('uploads/' . auth()->user()->username));
+        // Images::where('users_id', auth()->user()->id)->delete();
+
+        foreach ($galleries as $gallery) {
+            foreach ($gallery->images as $image) {
+                File::deleteDirectory(public_path('images/' . explode("/", $image->name)[0]));
+            }
+            Images::where('gallery_activities_id', $gallery->id)->delete();
+            $gallery->delete();
+        }
+        foreach ($blogs as $blog) {
+            foreach ($blog->images as $image) {
+                File::deleteDirectory(public_path('images/' . explode("/", $image->name)[0]));
+            }
+            Images::where('blogs_id', $blog->id)->delete();
+            $blog->delete();
+        }
+        $user->delete();
 
         Auth::logout();
         $request->session()->invalidate();

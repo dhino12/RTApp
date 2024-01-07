@@ -30,7 +30,7 @@
             <h1 class="text-3xl font-afacad font-bold text-white">Sering Ditanyakan 
                 <span class="inline-block animate-bounce">?</span>
             </h1>
-            <p class="font-sans text-white">Last modified: Feb 01 2021</p>
+            <p class="font-sans text-white">Last modified: <b>{{ $faqs[0]->created_at->diffForHumans() }}</b></p>
         </div>
         <form method="GET" class="mt-5 flex items-center gap-2 flex-col md:flex-row">
             <input type="text" id="search" name="search" value="{{ request('search') }}" placeholder="Capek scroll ? cari aja disini" class="md:min-w-[32vh] w-full shadow-md border-2 border-slate-200 rounded-md text-slate-800 h-12 px-2">

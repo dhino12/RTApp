@@ -1,17 +1,17 @@
 <div class="bg-gradient-to-b from-gray-600 to-white-600 overflow-hidden relative">
     <div class="h-[90vh] mix-blend-multiply">
         <img
-            src="https://source.unsplash.com/1000x600?indonesia"
+            src="https://source.unsplash.com/1000x600?white"
             alt=""
             class="h-full w-full object-cover object-center md:object-center"
         />
     </div>
     <div class="w-max absolute top-0 bottom-16 right-1/2 translate-y-56 translate-x-1/2 text-white text-center">
         <div class="mb-16 relative">
-            <h1 class="mb-10 text-4xl font-bold before:block before:absolute before:rounded-full before:-inset-1 before:-skew-y-3 before:bg-slate-500/40 before:backdrop-blur-md after:absolute after:border after:bottom-0 after:-right-[3vh] after:top-14 after:border-cyan-400 after:w-96 relative">
+            <h1 class="mb-2 text-xl md:text-4xl font-bold relative">
                 <span class="relative text-white">Selamat Datang</span>
             </h1>
-            <h2 class="text-2xl font-afacad">Warga RT002/RW02 Jatibening Baru</h2>
+            <h2 class="text-xl md:text-2xl font-afacad">Warga RT002/RW02 Jatibening Baru</h2>
         </div>
         <div>
             <button class="border-2 bg-white/20 backdrop-blur-lg px-5 py-1 rounded-md text-xl uppercase">

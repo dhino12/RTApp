@@ -11,9 +11,16 @@
 @section('container')
 <div class="h-[100vh] mb-10 md:mb-0 grid grid-cols-1 lg:grid-cols-2">
     <div class="mt-36 mx-12 md:w-96 md:mx-auto">
-        <h1 class="font-bold text-2xl mb-2">Register</h1>
+        @if(session()->has('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-5" role="alert">
+                <strong class="font-bold">Kesalahan terjadi: </strong>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <h1 class="font-bold text-2xl mb-2">{{ $title }}</h1>
         <p class="mb-4">Masukan data diri untuk mendaftar</p>
-        <form action="/register" method="POST">
+        <form action="{{ Request::getRequestUri() }}" method="POST">
             @csrf
             <div class="mb-5">
                 <label for="name" class="block mb-1 text-sm font-semibold">Nama Lengkap <span class="text-red-800">*</span></label>

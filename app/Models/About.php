@@ -10,4 +10,9 @@ class About extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function author()
+    {
+        return $this->hasMany(User::class, "id", 'user_id');
+    }
 }

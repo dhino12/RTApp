@@ -9,10 +9,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $categories = Category::latest()
+            ->filter(request(['search']))
+            ->get();
         return view('categories', [
-            "categories" => Category::latest()
-                ->filter(request(['search']))
-                ->get(),
+            "categories" => $categories,
         ]);
     }
 

@@ -25,21 +25,21 @@
                     </td>
                     <td 
                         class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
-                        {{ auth()->user()->name }}
+                        {{ $post->author->name ?? '' }}
                     </td>
                     <td
-                        class="w-82 font-sans-serif text-black max-w-[40vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="w-82 font-sans-serif text-black md:max-w-[40vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->title }}
                     </td>
                     <td
-                        class="font-sans-serif text-black max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black md:max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->category->title }}
                     </td>
                     <td
                         class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->created_at }}
                     </td>
-                    @if(!Request::is('dashboard'))
+                    @if(!Request::is('dashboard') && !(Request::segment(2) == "categories"))
                     <td
                         class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         <a href="{{ Request::getRequestUri() }}/{{ $post->slug }}/edit" class="bg-gradient-to-tl from-green-600 to-lime-400 px-2.5 text-sm rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white transition-all active:scale-[0.95] hover:scale-[1.05]">

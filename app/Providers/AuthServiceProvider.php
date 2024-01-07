@@ -5,7 +5,11 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Blogs;
+use App\Models\GalleryActivities;
+use App\Models\User;
 use App\Policies\BlogPolicy;
+use App\Policies\GalleryPolicy;
+use App\Policies\ProfilePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -16,7 +20,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        Blogs::class => BlogPolicy::class
+        Blogs::class => BlogPolicy::class,
+        GalleryActivities::class => GalleryPolicy::class,
+        User::class => ProfilePolicy::class,
     ];
 
     /**

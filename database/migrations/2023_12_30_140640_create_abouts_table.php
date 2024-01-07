@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text("description");
             $table->text("visi");
             $table->text("misi");
-            $table->text("path_image");
+            $table->text("path_image")->nullable();
             $table->string("user_id")->unique();
             $table->timestamps();
         });

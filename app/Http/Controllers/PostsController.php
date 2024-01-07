@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blogs;
 use App\Models\Category;
+use App\Models\DocumentReport;
 use App\Models\GalleryActivities;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class PostsController extends Controller
     }
 
     public function show(GalleryActivities $post) {
-        $previousItem = $post->where('id', '<', $post->id)->first();
+        $previousItem = $post->where('id', '<', $post->id)->orderBy('id', 'desc')->first();
         $nextItem = $post->where('id', '>', $post->id)->first();
 
         // dd($data->onEachSide(2));
@@ -57,7 +58,7 @@ class PostsController extends Controller
 
     public function showBlog(Blogs $blog)
     {
-        $previousItem = $blog->where('id', '<', $blog->id)->first();
+        $previousItem = $blog->where('id', '<', $blog->id)->orderBy('id', 'desc')->first();
         $nextItem = $blog->where('id', '>', $blog->id)->first();
 
         // dd($data->onEachSide(2));
@@ -65,6 +66,34 @@ class PostsController extends Controller
             "gallery" => $blog,
             "next" => $nextItem,
             "prev" => $previousItem
+        ]);
+    }
+
+    public function showDocumentReport(DocumentReport $document)
+    {
+        $previousItem = $document->where('id', '<', $document->id)->orderBy('id', 'desc')->first();
+        $nextItem = $document->where('id', '>', $document->id)->first();
+
+        // dd($data->onEachSide(2));
+        return view("post-detail-document", [
+            "gallery" => $document,
+            "next" => $nextItem,
+            "prev" => $previousItem
+        ]);
+    }
+
+    public function searchAll()
+    {
+        $galleries = GalleryActivities::latest()
+            ->filter(request(['search']))
+            ->paginate(12)->withQueryString();
+        $blogs = Blogs::latest()
+            ->filter(request(['search']))
+            ->paginate(12)->withQueryString();
+        return view("posts", [
+            "title" => '',
+            "posts" => $galleries,
+            "blogs" => $blogs,
         ]);
     }
 }

@@ -41,6 +41,28 @@
                 </div>
             </div>
         </div>
+
+        @if (!empty($blogsUser))
+            <div class="flex-none w-full max-w-full px-3">
+                <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+                    <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                        <h6 class="font-bold">Blogs User Table (Only Admin)</h6>
+                        <p>Admin dapat take down, postingan yang dibuat user</p>
+                    </div>
+                    <div class="flex-auto px-0 pt-0 pb-2">
+                        @include('dashboard/components/table', [
+                            "theads" => ["Author", "Title", "Category", "Dibuat", "action"],
+                            "posts" => $blogsUser,
+                        ])
+                    </div>
+                    @if ($blogsUser->hasPages())
+                        <div class="md:mx-10 mx-5 my-8">
+                            {{ $blogsUser->links() }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endif
     </div>
 </div>
 @endsection

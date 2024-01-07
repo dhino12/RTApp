@@ -4,7 +4,7 @@
 >
     <div class="h-20">
         <i class="absolute top-0 right-0 hidden p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 xl:hidden" sidenav-close></i>
-        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="javascript:;" target="_blank">
+        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="/dashboard">
             <h1 class="font-bold text-2xl">Informasi Warga</h1>
             <span class="font-semibold transition-all duration-200 ease-nav-brand">RT002/RW02 Jatibening Baru</span>
         </a>
@@ -61,6 +61,7 @@
                 </a>
             </li>
 
+            @can('read dashboard/about')
             <li class="w-full mt-4">
                 <h6 class="pl-6 ml-2 mb-3 text-xs font-bold leading-tight uppercase opacity-60">Tentang RT002</h6>
             </li>
@@ -76,6 +77,55 @@
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">About</span>
                 </a>
             </li>
+            <li class="mt-0.5 w-full">
+                <a class="{{ Request::is('dashboard/faq') ? 'active' : ''  }} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" 
+                    href="/dashboard/faq"
+                >
+                    <div class="{{ Request::is('dashboard/faq') ? 'active-tab' : ''  }} shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                        <span class="material-symbols-outlined text-[20px]">
+                            question_mark
+                        </span>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">FAQ</span>
+                </a>
+            </li>
+            <li class="mt-0.5 w-full">
+                <a class="{{ Request::is('dashboard/categories') ? 'active' : ''  }} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" 
+                    href="/dashboard/categories"
+                >
+                    <div class="{{ Request::is('dashboard/categories') ? 'active-tab' : ''  }} shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                        <span class="material-symbols-outlined text-[20px]">
+                            category
+                        </span>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Category</span>
+                </a>
+            </li>
+            <li class="mt-0.5 w-full">
+                <a class="{{ Request::is('dashboard/consensus') ? 'active' : ''  }} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" 
+                    href="/dashboard/consensus"
+                >
+                    <div class="{{ Request::is('dashboard/consensus') ? 'active-tab' : ''  }} shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                        <span class="material-symbols-outlined text-[20px]">
+                            show_chart
+                        </span>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Informasi Warga</span>
+                </a>
+            </li>
+            <li class="mt-0.5 w-full">
+                <a class="{{ Request::is('dashboard/documents') ? 'active' : ''  }} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" 
+                    href="/dashboard/documents"
+                >
+                    <div class="{{ Request::is('dashboard/documents') ? 'active-tab' : ''  }} shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                        <span class="material-symbols-outlined text-[20px]">
+                            folder_open
+                        </span>
+                    </div>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Data & Laporan</span>
+                </a>
+            </li>
+            @endcan
 
             <li class="mt-0.5 w-full">
                 <a class="{{ Request::is('about') ? 'login' : ''  }} py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/sign-in.html">
@@ -128,13 +178,16 @@
             </div>
         </div>
         <!-- pro btn  -->
-        <a
-            class="inline-block w-full px-6 py-3 my-4 text-xs font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro bg-gradient-to-tl from-purple-700 to-pink-500 hover:shadow-soft-2xl hover:scale-102"
-            target="_blank"
-            href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-tailwind?ref=sidebarfree"
-        >
-            Upgrade to pro
-        </a>
+        <form action="/logout" method="post">
+            @csrf
+            <button
+                class="inline-block w-full px-6 py-3 my-4 text-xs font-bold text-center text-white uppercase align-middle transition-all ease-in border-0 rounded-lg select-none shadow-soft-md bg-150 bg-x-25 leading-pro bg-gradient-to-tl from-purple-700 to-pink-500 hover:shadow-soft-2xl hover:scale-102"
+                target="_blank"
+                href="/logout"
+            >
+                Logout
+            </button>
+        </form>
     </div>
 </aside>
 <!-- end sidenav -->

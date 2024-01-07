@@ -9,6 +9,7 @@ use App\Models\AskedQuestions;
 use App\Models\Blogs;
 use App\Models\Category;
 use App\Models\CensusPopulation;
+use App\Models\DocumentReport;
 use App\Models\GalleryActivities;
 use App\Models\Images;
 use App\Models\TemporaryImage;
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->create();
+        // User::factory(5)->create();
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
@@ -32,10 +33,14 @@ class DatabaseSeeder extends Seeder
         About::factory(1)->create();
         Category::factory(3)->create();
         Images::factory(3)->create();
-        TemporaryImage::factory(2)->create();
+        // TemporaryImage::factory(2)->create();
         CensusPopulation::factory(1)->create();
         AskedQuestions::factory(5)->create();
         Blogs::factory(3)->create();
         GalleryActivities::factory(20)->create();
+        DocumentReport::factory(3)->create();
+        $this->call([
+            UserRolePermissionSeeder::class,
+        ]);
     }
 }

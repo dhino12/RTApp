@@ -23,7 +23,7 @@
             </div>
             <hr class="horizontal light mt-4 border-cyan-900">
         </div>
-        <div class="grid grid-cols-3 sm:grid-cols-2 mb-5 gap-4">
+        {{-- <div class="grid grid-cols-3 sm:grid-cols-2 mb-5 gap-4">
             <div>
                 <h2 class="text-lg font-semibold">Pages</h2>
                 <div>Tentang Kami</div>
@@ -36,12 +36,12 @@
                 <div>Tentang Kami</div>
                 <div>Tentang Kami</div>
             </div>
-        </div> 
+        </div>  --}}
         <div class="">
             <hr class="horizontal light mb-4 mt-lg-4 border-cyan-900">
             <h2 class="text-lg font-semibold mb-2">Cari Disini</h2>
-            <form class="flex gap-3">
-                <input type="text" placeholder="cari sesuatu ?" class="w-full shadow-md border-2 border-slate-200 rounded-md text-slate-800 h-10 px-2">
+            <form class="flex gap-3" method="GET" action="/posts/all">
+                <input type="text" name="search" placeholder="cari sesuatu ?" class="w-full shadow-md border-2 border-slate-200 rounded-md text-slate-800 h-10 px-2">
                 <button class="bg-gradient-to-l from-cyan-400 to-blue-600 px-4 rounded-lg font-semibold pt-1">
                     <span class="material-symbols-outlined">
                         search
@@ -53,5 +53,8 @@
 </div>
 <div class="bg-slate-900 text-white text-center px-5 pb-5">
     <hr class="horizontal light mb-4 mt-lg-4 border-cyan-900">
-    <p>Copyright © rukuntetangga.org All rights reserved</p>
+    <p>Copyright ©<script>
+        document.write(new Date().getFullYear() + ",");
+    </script> 
+    <a href="rukuntetangga.org">rukuntetangga.org </a>All rights reserved</p>
 </div>

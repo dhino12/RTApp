@@ -7,11 +7,14 @@ use App\Models\Category;
 use App\Models\GalleryActivities;
 use App\Models\Images;
 use App\Models\TemporaryImage;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Traits\HasRoles;
 
 class DashboardGalleryController extends Controller
 {
@@ -20,8 +23,14 @@ class DashboardGalleryController extends Controller
      */
     public function index()
     {
+        $roleName = Auth::user()->roles->pluck('name')[0];
+        $galleryUser = [];
+        if ($roleName == "superadmin" || $roleName == "admin") {
+            $galleryUser = GalleryActivities::where('user_id', '!=' ,auth()->user()->id)->latest()->paginate(10)->withQueryString();
+        }
         return view("dashboard/pages/gallery", [
-            "gallery" => GalleryActivities::where('user_id', auth()->user()->id)->paginate(12)->withQueryString(),
+            "gallery" => GalleryActivities::where('user_id', auth()->user()->id)->latest()->paginate(10)->withQueryString(),
+            "galleryUser" => $galleryUser,
         ]);
     }
 
@@ -60,6 +69,7 @@ class DashboardGalleryController extends Controller
             return redirect("/dashboard/gallery/create")->withErrors($validateData)->withInput();
         }
         $validateData = $validateData->validate();
+        $validateData['body'] = preg_replace("#/storage/tmp/#", "/", $validateData['body']);
         $validateData["user_id"] = auth()->user()->id;
         $gallery = GalleryActivities::create($validateData);
 
@@ -108,6 +118,7 @@ class DashboardGalleryController extends Controller
      */
     public function edit(GalleryActivities $gallery)
     {
+        $this->authorize('update', $gallery);
         return view("/dashboard/pages/form-edit", [
             "categories" => Category::all(),
             "post" => $gallery
@@ -141,7 +152,8 @@ class DashboardGalleryController extends Controller
         }
 
         $validateData = $validateData->validate();
-        $validateData["user_id"] = auth()->user()->id;
+        $validateData['body'] = preg_replace("#/storage/tmp/#", "/", $validateData['body']);
+        // $validateData["user_id"] = auth()->user()->id;
         GalleryActivities::where('id', $gallery->id)->update($validateData);
 
         /**
@@ -173,7 +185,7 @@ class DashboardGalleryController extends Controller
             Storage::deleteDirectory("tmp/uploads/" . auth()->user()->username);
         }
  
-        return redirect("/dashboard/gallery")->with("success", "Post Gallery has been Edited! ");
+        return redirect("/dashboard/gallery")->with("success", "Post Gallery has been Edited! by title: " . $gallery->title);
     }
 
     /**
@@ -194,12 +206,16 @@ class DashboardGalleryController extends Controller
          * Delete file from public/upload/{username}
          * this is file from trix-editor attachment 
          */
-        $pattern = '/&quot;filename&quot;:&quot;([^&]*)&quot;/';
+        $pattern = '/&quot;url&quot;:&quot;([^&]*)&quot;/';
         preg_match_all($pattern, $gallery->body, $matches);
         if (!empty($matches[1])) {
-            foreach($matches[1] as $fileNameTrixEditor) {
-                File::delete(public_path('uploads/' . auth()->user()->username .'/' . $fileNameTrixEditor));
-            }
+             foreach($matches[1] as $fileNameTrixEditor) {
+                 // Mendapatkan path dari URL
+                 $path = parse_url($fileNameTrixEditor, PHP_URL_PATH);
+                 // Mendapatkan nama file tanpa parameter query string
+                 $fileName = pathinfo($path, PATHINFO_BASENAME);
+                 File::delete(public_path('uploads/' . auth()->user()->username .'/' . $fileName));
+             }
         }
 
         return redirect("/dashboard/gallery")->with("success", "Post Gallery " . $gallery->title . " has been deleted! ");

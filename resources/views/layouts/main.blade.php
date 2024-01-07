@@ -26,6 +26,9 @@
             h1 {
                 @apply text-4xl;
             }
+            #body h1 {
+                @apply text-3xl font-bold my-1;
+            }
             ol {
                 list-style-type: auto;
                 margin-left: 2.5vh
@@ -51,6 +54,14 @@
     
             .item .content {
                 @apply py-8 px-3 ;
+            }
+
+            .attachment__caption {
+                @apply text-center;
+            }
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                list-style: none
             }
 
             .waves {
@@ -249,41 +260,6 @@
                 });
             });
         </script>
-        
-        <script>
-            const dataTable = new DataTable('#report', {
-                data: [
-                    [
-                        "Tiger Nixon",
-                        "System Architect",
-                    ],
-                    [
-                        "Garrett Winters",
-                        "Director",
-                    ],
-                    [
-                        "Garrett Winters",
-                        "Director",
-                    ],
-                    [
-                        "Garrett Winters",
-                        "Director",
-                    ],
-                    [
-                        "Garrett Winters",
-                        "Director",
-                    ],
-                ],
-                responsive: {
-                    details: false
-                },
-                searching: false,
-                aoColumns: [
-                    { "sWidth": "95px", "sClass": " font-sans-serif text-center" },
-                    { "sWidth": "95px", "sClass": " font-sans-serif text-center" },
-                ],
-                dom:'rtip'
-            });
-        </script>
+        @yield('scripts')
     </body>
 </html>

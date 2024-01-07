@@ -49,6 +49,7 @@
                     @enderror
                 </div>
             </div>
+            @if (count($categories) != 0)
             <div>
                 <label for="category_id" class="font-semibold">Category <span class="text-red-500 font-bold">*</label>
                 <span class="text-red-500 block">Tolong isikan category, agar postingan rapih terkelompok</span>
@@ -59,6 +60,7 @@
                     </div>
                 @enderror
             </div>
+            @endif
             <div>
                 <label for="body" class="font-semibold">Description</label>
                 <input

@@ -17,4 +17,12 @@ class Category extends Model
             return $query->where('title', 'like', '%' . $search . '%');
         });
     }
+
+    public function blogs() {
+        return $this->hasMany(Blogs::class, 'category_id', 'id');
+    }
+
+    public function galleries() {
+        return $this->hasMany(GalleryActivities::class, 'category_id', 'id');;
+    }
 }

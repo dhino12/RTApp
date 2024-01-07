@@ -9,6 +9,10 @@
     </div>
     <!-- cards row 4 -->
     <div class="mx-10 px-6 py-7 my-10 shadow-soft-sm lg:w-9/12 mx-10 lg:mx-auto rounded-xl bg-white">
+        <div class="bg-orange-200 border border-orange-400 text-green-800 px-4 py-3 rounded relative mb-5" role="alert">
+            <strong class="font-bold">Peringatan: </strong>
+            <p>Ketika menghapus file didalam text-editor maka file tersebut akan terhapus dari sistem</p>
+        </div>
         @if(session()->has('success'))
             <div class="bg-lime-100 border border-green-400 text-green-800 px-4 py-3 rounded relative mb-5" role="alert">
                 {{ session('success') }}
@@ -127,7 +131,7 @@
                 </form>
             </div>
             <div class="bg-gradient-to-b from-slate-400 to-slate-900 h-96 md:h-full card-hover rounded-2xl overflow-hidden sm:bg-red-200 md:min-h-[50vh] shadow-lg shadow-slate-300">
-                <embed src="/images/{{ $image->name }}" alt="" class="mix-blend-overlay w-full h-full object-cover">
+                <embed src="/images/{{ $image->name }}" autoplay=0 alt="" class="mix-blend-overlay w-full h-full object-cover">
             </div>
             <div class="absolute bottom-0 mb-5 mx-5">
                 <h2 class="text-2xl text-white font-sans-serif font-semibold mb-4 line-clamp-2">{{ $image->title }}.</h2>
@@ -143,17 +147,13 @@
                         <div class="transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-fit">
                             <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                 <div class="sm:flex sm:items-start">
-                                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                        <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                                            />
-                                        </svg>
+                                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-lime-100 sm:mx-0 sm:h-10 sm:w-10">
+                                        <span class="material-symbols-outlined">
+                                            mms
+                                        </span>
                                     </div>
                                     <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Deactivate account</h3>
+                                        <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">Deskripsi Gambar</h3>
                                         <div class="mt-2">
                                             <form action="/update-file?id={{ $image->id }}" method="post" class="w-full">
                                                 @method("put")
@@ -173,14 +173,13 @@
                                                 </div>
                                                 <div>
                                                     <label for="body">Description</label>
-                                                    <input
+                                                    <textarea
                                                         type="text"
                                                         name="description"
                                                         id="description" 
                                                         placeholder="masukan konten deskripsi"
-                                                        value="{{ old('description', $image->description) }}"
                                                         class="w-full mt-2 rounded-md h-10 px-2 py-2 border-2 border-slate-200 block text-sm placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 invalid:text-red-500 invalid:focus:ring-red-700 invalid:focus:border-red-700 peer"
-                                                    >
+                                                    >{{ old('description', $image->description) }}</textarea>
                                                     {{-- <trix-editor input="description" placeholder="masukan konten deskripsi"></trix-editor> --}}
                                                 </div>
                                                 <div class="mx-auto mt-10 w-fit">
@@ -283,7 +282,7 @@
         allowFileSizeValidation: true,
         labelMaxFileSizeExceeded: 'File terlalu besar',
         maxFileSize: '50MB',
-        acceptedFileTypes: ['image/png',"image/gif","image/jpeg"],
+        acceptedFileTypes: ['image/png',"image/gif","image/jpeg", 'video/mp4'],
     });
     FilePond.setOptions({
         server: {

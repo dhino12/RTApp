@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
@@ -19,9 +20,10 @@ class ImageController extends Controller
             $fileNameWithExtension = $request->file('file')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             $extension = $request->file('file')->getClientOriginalExtension();
-            $fileNameToStore = $fileName . "." . $extension;
+            $fileNameToStore = $fileName . '-' . Hash::make($fileName) . "." . $extension;
+            $fileNameToStore = str_replace('/', '', $fileNameToStore);
             $request->file('file')->storeAs('tmp/uploads/' . auth()->user()->username, $fileNameToStore);
-            $path = asset('/uploads/' . auth()->user()->username . '/' . $fileNameToStore);
+            $path = asset('/storage/tmp/uploads/' . auth()->user()->username . '/' . $fileNameToStore);
             echo $path;
             exit;
         }
@@ -35,8 +37,12 @@ class ImageController extends Controller
         Storage::delete("tmp/uploads/" . auth()->user()->username . "/" . $request->name);
         if (File::exists('uploads/' . auth()->user()->username . "/" . $request->name)) {
             Storage::delete("uploads/" . auth()->user()->username . "/" . $request->name);
+            File::delete(public_path('uploads/' . auth()->user()->username . "/" . $request->name));
         }
-        exit;
+        return response()->json([
+            "message" => "success deleted",
+            "name" => $request->name,
+        ]);
     }
 
     public function updateFilePondDescription(Request $request)

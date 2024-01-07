@@ -29,7 +29,7 @@
 
 <div class="bg-gradient-to-b from-transparent z-20 via-slate-100 via-20% to-slate-100">
     <div class="w-2/3 lg:w-1/2 mx-auto rounded-lg overflow-hidden py-5 px-8 -mt-10 bg-slate-100 shadow-lg">
-        <h1 class="mb-3 font-bold">Search</h1>
+        <h2 class="text-lg mb-3 font-bold">Search</h2>
         <form action="" class="flex justify-center flex-col lg:flex-row lg:gap-6 items-center">
             <input type="text" name="search" placeholder="Search of category" class="w-full shadow-md border-2 border-slate-200 rounded-md text-slate-800 h-10 px-2">
             <button type="submit" class="bg-gradient-to-l from-cyan-400 to-blue-600 px-4 rounded-lg font-semibold py-2 text-white mt-3 active:scale-[0.95] hover:scale-[1.05] transition-all lg:mt-0">Search</button>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="absolute bottom-0 bg-gradient-to-b from-slate-400/10 to-slate-900/80 w-full min-h-20 p-4 text-white">
                             <h1 class="font-bold text-2xl">{{ $category->title }}</h1>
-                            <p>100 content</p>
+                            <p>{{ count($category->blogs) + count($category->galleries) }} content</p>
                         </div>
                     </div>
                 </a>

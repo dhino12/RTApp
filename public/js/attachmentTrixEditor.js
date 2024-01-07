@@ -2,9 +2,19 @@
     var HOST = "http://127.0.0.1:8000/"; //pass the route
     addEventListener("trix-file-accept", function(event) {
         // Prevent attaching .png files
-        if (event.file.type === "application/pdf") {
-            // alert("Menambahkan pdf mungkin tidak terlihat langsung")
-            // event.preventDefault()/
+        
+        switch (event.file.type) {
+            case 'application/pdf':
+            case 'video/mp4':
+            case 'image/png':
+            case 'image/jpg':
+            case 'image/jpeg':
+                break;
+        
+            default:
+                alert("File ini tidak didukung. Harap gunakan PDF");
+                event.preventDefault();
+                break;
         }
       
         /**
@@ -17,8 +27,8 @@
             alert("File to large, max size 50mb")
         }
     })
-    addEventListener("trix-attachment-add", function(event) {
-        
+
+    addEventListener("trix-attachment-add", function(event) {  
         if (event.attachment.file) {
             uploadFileAttachment(event.attachment)
         }
@@ -27,9 +37,10 @@
     addEventListener("trix-attachment-remove", async function (event) {
         const attachment = event.attachment;
 
-        if (attachment.file) {
-            const file = attachment.file;
-            console.log(attachment.file.name);
+        console.log(attachment);
+        if (attachment.attachment) {
+            const file = attachment.attachment.attributes.values;
+            
             try {
                 const response = await fetch(HOST + "destroy-trix", {
                     method: 'DELETE',
@@ -38,8 +49,8 @@
                         'X-CSRF-TOKEN': getMeta('csrf-token'),
                     },
                     body: JSON.stringify({
-                        name: file.name,
-                        size: file.size,
+                        name: file.url.split('/').pop(),
+                        size: file.filesize,
                         type: file.type
                     }),
                 });
@@ -63,17 +74,28 @@
         }
  
         function setAttributes(attributes) {
-            if (attributes.type == 'application/pdf') {
-                attachment.setAttributes({ 
-                    content: `<iframe src="${attributes.href}" onerror="" frameborder="0" allowfullscreen class="w-full h-[66vh]"></iframe>`,
-                    ...attributes,
-                });
-            } else {
-                attachment.setAttributes(attributes);
+            switch (attributes.type) {
+                case 'application/pdf':
+                case 'video/mp4':
+                    attachment.setAttributes({ 
+                        content: `<iframe src="${attributes.url}" type="${attributes.type}" onerror="" frameborder="0" allowfullscreen class="w-full h-[66vh]">
+                        <object data="${attributes.href}" type="${attributes.type}"></object>
+                        </iframe>`,
+                        ...attributes,
+                    });
+                    break;
+            
+                default:
+                    attachment.setAttributes({ 
+                        content: `<img src="${attributes.href}" alt="" class="w-fit max-h-[66vh] mx-auto">`,
+                        ...attributes,
+                    });
+                    attachment.setAttributes(attributes);
+                    break;
             }
         }
     }
- 
+
     function uploadFile(file, progressCallback, successCallback) {
         var formData = createFormData(file);
         var xhr = new XMLHttpRequest();

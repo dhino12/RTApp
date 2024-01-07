@@ -31,7 +31,17 @@
     </div>
 @endsection
 
-@section('container')
+@section('container') 
+@php
+    function getImage($data): string {
+        $pattern = '/&quot;url&quot;:&quot;([^&]*)&quot;/';
+        preg_match($pattern, $data->body, $bodyImageMatch);
+        $bodyImageMatch = count($bodyImageMatch) == 0 ? 'https://source.unsplash.com/1000x600?football' : $bodyImageMatch[1];
+        $galleryImages = count($data->images) == 0 ? false : '/images/' . $data->images[0]->name;
+        $image = $galleryImages ?: $bodyImageMatch ;
+        return $image;
+    }
+@endphp
 <div class="relative bg-gradient-to-b from-transparent z-20 via-slate-100 via-20% to-slate-100">
     <div class="w-2/3 lg:w-1/2 mx-auto rounded-lg overflow-hidden py-5 px-8 -mt-10 bg-[#ffffffcc]/60 backdrop-blur-2xl shadow-lg">
         <form action="" method="GET" class="flex justify-center flex-col lg:flex-row lg:gap-6 items-center">
@@ -41,7 +51,7 @@
             @if (request('author'))
                 <input type="hidden" name="author" value="{{ request('author') }}">
             @endif
-            <input type="text" name="search" placeholder="Search of category" class="w-full shadow-md border-2 border-slate-200 rounded-md text-slate-800 h-12 px-2" value="{{ request('search') }}">
+            <input type="text" name="search" placeholder="Search of {{ request()->segment(2) }}" class="w-full shadow-md border-2 border-slate-200 rounded-md text-slate-800 h-12 px-2" value="{{ request('search') }}">
             <button type="submit" class="bg-gradient-to-l from-cyan-400 to-blue-600 px-4 rounded-lg font-semibold py-2 text-white mt-3 active:scale-[0.95] hover:scale-[1.05] transition-all lg:mt-0">Search</button>
         </form>
     </div>
@@ -63,7 +73,7 @@
                 @foreach ($posts as $post)
                     <a href="/post/gallery/{{ $post->slug }}" class="relative card-hover rounded-2xl overflow-hidden sm:bg-red-200 md:min-h-[50vh] shadow-lg shadow-slate-300">
                         <div class="bg-gradient-to-b from-slate-400 to-slate-900 h-96 md:h-full">
-                            <img src="https://source.unsplash.com/1000x600?indonesia" alt="" class="mix-blend-overlay w-full h-full object-cover">
+                            <img src="{{ getImage($post) }}" alt="" class="mix-blend-overlay w-full h-full object-cover">
                         </div>
                         <div class="absolute bottom-0 mb-5 mx-5 text-white">
                             <h2 class="text-2xl font-afacad font-semibold mb-4 line-clamp-2">{{ $post->title }}.</h2>
@@ -89,14 +99,14 @@
                     <a href="/post/blog/{{ $blog->slug }}">
                         <div class="max-w-[18rem] sm:max-w-[22rem] mb-12 transition-all hover:scale-[1.02]">
                             <div class="h-56 bg-red-200">
-                                <img src="https://source.unsplash.com/1000x600?football" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
+                                <img src="{{ getImage($blog) }}" alt="" class="w-full h-full rounded-lg shadow-lg object-cover object-center">
                             </div>
                             <div class="flex justify-between flex-col items-start h-40 rounded-2xl pb-5">
                                 <span>
                                     <h2 class="min-h-[4rem] mt-3 mb-0 font-semibold text-slate-800 text-2xl font-afacad line-clamp-2 capitalize">
                                         {{ $blog->title }}
                                     </h2>
-                                    <p class="text-slate-600 text-justify line-clamp-3">
+                                    <p class="min-h-[4.5rem] text-slate-600 text-justify line-clamp-3">
                                         {{ strip_tags($blog->body) }}
                                     </p>
                                 </span>

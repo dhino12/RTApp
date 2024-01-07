@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DashboardProfileController extends Controller
 {
@@ -27,7 +29,7 @@ class DashboardProfileController extends Controller
             "self_information" => ["max:255"],
         ];
         $validateData = $request->validate($rules);
-        $validateData["password"] = $user->password;
+        $validateData["password"] = Hash::make($user->password);
         if ($request->username != $user->username) {
             $rules["username"] = ["required", "max:255", "unique:users"];
         }
@@ -65,6 +67,7 @@ class DashboardProfileController extends Controller
             Images::where('blogs_id', $blog->id)->delete();
             $blog->delete();
         }
+        $user->removeRole($user->getRoleNames()[0]);
         $user->delete();
 
         Auth::logout();

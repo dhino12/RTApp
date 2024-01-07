@@ -26,7 +26,8 @@
         $pattern = '/&quot;url&quot;:&quot;([^&]*)&quot;/';
         preg_match($pattern, $data->body, $bodyImageMatch);
         $bodyImageMatch = count($bodyImageMatch) == 0 ? 'https://source.unsplash.com/1000x600?football' : $bodyImageMatch[1];
-        $galleryImages = count($data->images) == 0 ? false : '/images/' . $data->images[0]->name;
+        $galleryImages = count($data->images) == 0 || preg_match('/\.mp4$/', $data->images[0]->name) ? 
+            false : '/images/' . $data->images[0]->name;
         $image = $galleryImages ?: $bodyImageMatch ;
         return $image;
     }
@@ -346,8 +347,16 @@
                 <button class="block mx-auto mt-5 px-4 py-3 shadow-md active:scale-[0.95] hover:scale-[1.05] transition-all text-white font-semibold bg-gradient-to-r from-cyan-400 to-blue-600 rounded-lg uppercase">Selengkapnya</button>
             </a>
         </div>
-        <div id="contact" class="mt-20 pb-20 lg:max-w-7xl lg:mx-auto">
-            <div class="mx-8 sm:mx-auto sm:w-3/4 lg:w-[105vh]">
+        <div id="contact" class="mt-20 pb-20 lg:max-w-7xl lg:mx-auto flex flex-col md:flex-row justify-center gap-3">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.077714847132!2d106.94027197480351!3d-6.2534912937349745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698ce2118760c3%3A0x38ecc86d284b2a58!2sJl.%20H.%20Namat%20No.RT%20002%2C%20RT.002%2FRW.002%2C%20Jatibening%20Baru%2C%20Kec.%20Pd.%20Gede%2C%20Kota%20Bks%2C%20Jawa%20Barat%2017412!5e0!3m2!1sid!2sid!4v1704603836555!5m2!1sid!2sid" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                class="w-3/4 max-h-[70vh]"
+            ></iframe>
+            <div class="mx-8 sm:mx-auto sm:w-3/4 lg:w-[115vh]">
                 <blockquote class="block text-center font-bold font-afacad text-3xl mb-2 lg:text-4xl">Butuh Bantuan <span class="inline-block animate-bounce">?</span></blockquote>
                 <p class="after:content-['”'] before:content-['”'] md:w-2/3 mx-auto text-center">
                     Terkendala atau pertanyaan? Jangan ragu untuk menghubungi kami. Kami di sini untuk membantu 📧📞

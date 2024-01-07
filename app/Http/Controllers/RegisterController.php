@@ -51,7 +51,7 @@ class RegisterController extends Controller
 
         $validateData["password"] = Hash::make($validateData["password"]);
         $validateData["is_admin"] = true;
-        $role = Role::findByName('superadmin');
+        $role = Role::findByName('admin');
         if ($role->users()->exists()) {
             return redirect('/register/admin')->with("error", "Admin sudah ditambahkan, jika lupa akun tolong konfirmasi...");
         }

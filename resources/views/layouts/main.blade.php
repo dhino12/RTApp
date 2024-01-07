@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#db5945">
+        <link rel="manifest" href="/assets/manifest.json">
+        <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/icons/icon-72x72.png" />
+        <link rel="icon" type="image/png" href="/assets/images/icons/icon-512x512.png" />
         <title>Hello</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />

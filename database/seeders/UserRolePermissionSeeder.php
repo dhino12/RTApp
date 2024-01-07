@@ -32,6 +32,12 @@ class UserRolePermissionSeeder extends Seeder
                 "name" => "superadmin",
             ], $default_user_role));
 
+            $admin = User::create(array_merge([
+                "username" => "admin",
+                "name" => "admin",
+                "email" => "admin@gmail.com",
+            ], $default_user_role));
+
             $user = User::create(array_merge([
                 "username" => "user",
                 "name" => "user",
@@ -39,6 +45,7 @@ class UserRolePermissionSeeder extends Seeder
             ], $default_user_role));
 
             $roleSuperAdmin = Role::create([ "name" => "superadmin" ]);
+            $roleAdmin = Role::create([ "name" => "admin" ]);
             $roleUser = Role::create([ "name" => "user" ]);
 
             Permission::create([ "name" => "read dashboard/about" ]);
@@ -61,7 +68,20 @@ class UserRolePermissionSeeder extends Seeder
                 'update dashboard/consensus', 'delete dashboard/consensus',
             ]);
 
+            $roleAdmin->givePermissionTo([
+                'read dashboard/about', 'update dashboard/about',
+                'create dashboard/documents', 'read dashboard/documents',
+                'update dashboard/documents', 'delete dashboard/documents', 
+                'create dashboard/faq', 'read dashboard/faq',
+                'update dashboard/faq', 'delete dashboard/faq',
+                'create dashboard/categories', 'read dashboard/categories',
+                'update dashboard/categories', 'delete dashboard/faq',
+                'create dashboard/consensus', 'read dashboard/consensus',
+                'update dashboard/consensus', 'delete dashboard/consensus',
+            ]);
+
             $superAdmin->assignRole('superadmin');
+            $admin->assignRole('admin');
             $user->assignRole('user');
 
             DB::commit();

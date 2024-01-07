@@ -14,9 +14,20 @@
 @endsection
 
 @section('container')
+@php
+function getImage($data): string {
+    $pattern = '/&quot;url&quot;:&quot;([^&]*)&quot;/';
+    preg_match($pattern, $data->body, $bodyImageMatch);
+    $bodyImageMatch = count($bodyImageMatch) == 0 ? 'https://source.unsplash.com/1000x600?football' : $bodyImageMatch[1];
+    $galleryImages = count($data->images) == 0 || preg_match('/\.mp4$/', $data->images[0]->name) ? 
+        false : '/images/' . $data->images[0]->name;
+    $image = $galleryImages ?: $bodyImageMatch ;
+    return $image;
+}
+@endphp
 <div class="bg-slate-100">
     <img
-        src="https://source.unsplash.com/1000x600?indonesia"
+        src="{{ getImage($gallery) }}"
         alt=""
         class="relative z-20 mx-auto h-[65vh] w-4/5 mt-5 rounded-3xl overflow-hidden object-cover object-center"
     />
@@ -48,12 +59,12 @@
             <embed src="" alt="" class="w-full object-contain h-[80vh] rounded-md lg:max-w-[140vh] lg:min-w-[140vh]">
             <div class="mt-3 text-center text-slate-800">
                 <h1>Hello World</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, voluptatem.</p>
+                <p class="text-lg md:max-w-[80vh] mx-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, voluptatem.</p>
             </div>
-            <div class="nav-slider absolute top-[40%] w-full flex justify-between">
+            {{-- <div class="nav-slider absolute top-[40%] w-full flex justify-between">
                 <button class="rounded-full text-slate-800 bg-white p-2">next</button>
                 <button class="rounded-full text-slate-800 bg-white p-2">prev</button>
-            </div> 
+            </div>  --}}
         </article>
     </div>
 

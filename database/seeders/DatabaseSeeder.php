@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         About::factory(1)->create();
         Category::factory(3)->create();
-        Images::factory(3)->create();
+        // Images::factory(3)->create();
         // TemporaryImage::factory(2)->create();
         CensusPopulation::factory(1)->create();
         AskedQuestions::factory(5)->create();

@@ -1,9 +1,13 @@
 @php
     $pattern = '/&quot;url&quot;:&quot;([^&]*)&quot;/';
     preg_match($pattern, $data->body, $bodyImageMatch);
-    $bodyImageMatch = count($bodyImageMatch) == 0 ? 'https://source.unsplash.com/1000x600?football' : $bodyImageMatch[1];
-    $galleryImages = count($data->images) == 0 ? false : '/images/' . $data->images[0]->name;
-    $image = $galleryImages ?: $bodyImageMatch ;
+    $bodyImageMatch = count($bodyImageMatch) == 0 ? 
+        'https://source.unsplash.com/1000x600?football' : $bodyImageMatch[1];
+
+    $galleryImages = count($data->images) == 0 || preg_match('/\.mp4$/', $data->images[0]->name) ? 
+        false : '/images/' . $data->images[0]->name;
+        
+    $image = $galleryImages ?: $bodyImageMatch;
 @endphp
 <a href="/post/gallery/{{ $data->slug }}" class="{{ $className ?? '' }} block relative card-hover rounded-2xl overflow-hidden md:min-h-[50vh]">
     <div class="bg-gradient-to-b from-slate-400 to-slate-900 h-96 md:h-full">

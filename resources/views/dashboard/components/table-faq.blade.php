@@ -20,25 +20,25 @@
             @foreach ($posts as $post)
                 <tr class="hover:bg-slate-100">
                     <td
-                        class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $loop->iteration }}
                     </td>
                     <td 
-                        class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->author->name ?? auth()->user()->name }}
                     </td>
                     <td
-                        class="font-sans-serif text-black max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         <a href="{{ $post->path_document }}" class="hover:text-cyan-600">{{ $post->title }}</a>
                     </td>
                     @if ($post->body)
                         <td
-                            class="font-sans-serif text-black max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                            class="font-sans-serif text-black text-wrap max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                             {{ Illuminate\Support\Str::limit(strip_tags($post->body), 50, '...') }}
                         </td>
                     @endif
                     <td
-                        class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->created_at }}
                     </td>
                     @if(!Request::is('dashboard'))

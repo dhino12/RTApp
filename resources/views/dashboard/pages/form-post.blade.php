@@ -112,7 +112,7 @@
 <script src="/js/attachmentTrixEditor.js"></script>
 <script> 
     function getCategories() {
-        const categories = fetch(`http://127.0.0.1:8000/api/categories`)
+        const categories = fetch(`{{ request()->root()  }}/api/categories`)
             .then(response => response.json())
             .then(dataArray => {
                 const element = document.querySelector('.choice');
@@ -165,6 +165,7 @@
         })
             .then(response => response.json())
             .then(data => console.log(data))
+            .catch(error => console.error(error))
     });
 </script>
 <script>

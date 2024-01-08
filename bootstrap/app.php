@@ -15,6 +15,11 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+/**
+ * Change or rename folder public
+ */
+// $app->usePublicPath($app->basePath('public_html'));
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

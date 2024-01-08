@@ -63,7 +63,7 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900">Import CSV</h3>
             <div class="mt-2 px-7 py-3">
                 <p class="text-sm text-gray-500">
-                    Tolong gunakan <a href="" class="text-red-800 font-bold">format ini</a> agar hasil yang diharapkan sesuai. <br>
+                    Tolong gunakan <a href="https://docs.google.com/spreadsheets/d/15UcT1OLCFwFYlF7XcCTLItlU8eN5a9Dx/edit?usp=sharing&ouid=101869859562811446150&rtpof=true&sd=true" class="text-red-800 font-bold">format ini</a> agar hasil yang diharapkan sesuai. <br>
                     Pastikan sudah di export ke csv, bagaimana caranya ? <a href="https://convertio.co/xlsx-csv/" class="text-red-800 font-bold">ini caranya</a>
                 </p>
             </div>

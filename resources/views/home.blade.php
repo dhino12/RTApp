@@ -299,7 +299,7 @@
                 <h1 id="data-laporan" class="text-3xl font-bold font-afacad text-white text-center lg:text-4xl">Data & Laporan</h1>
                 <img src="https://source.unsplash.com/1000x600?indonesia" alt="" class="w-full h-full absolute top-0 object-cover object-bottom mix-blend-soft-light opacity-75">
             </div>
-            <div class="lg:mx-36 -translate-y-32 mx-12 px-5">
+            <div class="lg:mx-36 -translate-y-32 mx-5 px-5">
                 <table id="report" class="display responsive nowrap bg-slate-100 rounded-2xl overflow-hidden mt-4" width="100%">
                     <thead>
                         <tr>
@@ -354,7 +354,7 @@
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade"
-                class="w-3/4 max-h-[70vh]"
+                class="w-3/4 max-h-[70vh] mx-8 sm:mx-auto"
             ></iframe>
             <div class="mx-8 sm:mx-auto sm:w-3/4 lg:w-[115vh]">
                 <blockquote class="block text-center font-bold font-afacad text-3xl mb-2 lg:text-4xl">Butuh Bantuan <span class="inline-block animate-bounce">?</span></blockquote>
@@ -423,10 +423,10 @@
             const data = [];
             let newIndicator = ''
             if (index == 0) {
-                newIndicator = `after:absolute after:content-['new'] after:-right-10 after:text-xs after:font-bold after:text-red-700 after:bg-white relative`
+                newIndicator = `after:absolute after:content-['new'] after:-right-1 md:after:-right-10 after:text-xs after:font-bold after:text-red-700 after:bg-white relative`
             }
             data.push(`
-                <a href="/post/document/${document.slug}" class="text-blue-800 hover:underline ${newIndicator}">
+                <a href="/post/document/${document.slug}" class="text-blue-800 w-full block text-wrap hover:underline ${newIndicator}">
                     ${document.title}
                 </a>`)
             const isoDate = new Date(document.created_at);

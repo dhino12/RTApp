@@ -20,31 +20,31 @@
             @foreach ($posts as $post)
                 <tr class="hover:bg-slate-100">
                     <td
-                        class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $loop->iteration }}
                     </td>
                     <td 
-                        class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ auth()->user()->name }}
                     </td>
                     <td
-                        class="w-82 font-sans-serif text-black max-w-[40vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="w-82 font-sans-serif text-black text-wrap max-w-[40vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->male }}
                     </td>
                     <td
-                        class="font-sans-serif text-black max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->female }}
                     </td>
                     <td
-                        class="font-sans-serif text-black max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->total_population }}
                     </td>
                     <td
-                        class="font-sans-serif text-black max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap max-w-[30vh] text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->total_family }}
                     </td>
                     <td
-                        class="font-sans-serif text-black text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
+                        class="font-sans-serif text-black text-wrap text-left px-5 py-2 text-sm leading-normal bg-transparent border-b border-slate-300 whitespace-nowrap md:whitespace-normal">
                         {{ $post->created_at }}
                     </td>
                     @if(!Request::is('dashboard'))

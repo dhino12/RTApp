@@ -7,7 +7,7 @@
         <link rel="manifest" href="/assets/manifest.json">
         <link rel="apple-touch-icon" sizes="72x72" href="/assets/images/icons/icon-72x72.png" />
         <link rel="icon" type="image/png" href="/assets/images/icons/icon-512x512.png" />
-        <title>Hello</title>
+        <title>Informasi Warga</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

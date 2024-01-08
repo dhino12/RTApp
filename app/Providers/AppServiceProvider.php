@@ -11,7 +11,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        /**
+         * Change public folder to public_html
+         * change more into bootstrap/app.php
+         */
+        /*
+        $this -> app -> bind('path.public', function() { 
+            return base_path('public_html'); 
+        });
+        */
     }
 
     /**

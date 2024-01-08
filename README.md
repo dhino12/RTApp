@@ -9,8 +9,10 @@ Migration Front-end to React JS comming soon after next lifecycle prod
 </p>
 
 
-## About Laravel
+## About RTApp
+RTApp adalah aplikasi web untuk kegiatan rukuntetangga khususnya RT02 yang dimana seluruh kegiatan akan direncanakan, diumumkan, dan didokumentasikan didalam website ini, website ini mendukung fitur upload, embed, read pdf dan import / export csv to mysql.
 
+## Application Technology Base
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
@@ -23,33 +25,18 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### Supported Library
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **[tailwindcss](https://tailwindcss.com/)**
+- **[spatie](https://spatie.be/docs/laravel-permission/v6/installation-laravel)**
+- **[Trix-Editor](https://github.com/basecamp/trix)**
+- **[filepond](https://pqina.nl/filepond/#multi-file-code)**
+- **[league\csv](https://csv.thephpleague.com/)**
+- **[eloquent-sluggable](https://github.com/cviebrock/eloquent-sluggable)**
 
 ## Laravel Sponsors
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
 
 ## Contributing
 

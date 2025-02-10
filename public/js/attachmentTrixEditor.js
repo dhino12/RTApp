@@ -1,5 +1,5 @@
 (function () {
-    var HOST = "https://rt002.000webhostapp.com/"; //pass the route
+    var HOST = "http://127.0.0.1:8000/"; //pass the route
     addEventListener("trix-file-accept", function (event) {
         // Prevent attaching .png files
 

@@ -182,7 +182,7 @@
         allowFileSizeValidation: true,
         labelMaxFileSizeExceeded: 'File terlalu besar',
         maxFileSize: '50MB',
-        acceptedFileTypes: ['image/png',"image/gif","image/jpeg"],
+        acceptedFileTypes: ['image/png',"image/gif","image/jpeg", "video/mp4"],
     });
     FilePond.setOptions({
         server: {

@@ -12,6 +12,7 @@
                 <span class="relative text-white">Selamat Datang</span>
             </h1>
             <h2 class="text-xl md:text-2xl font-afacad">Warga RT002/RW02 Jatibening Baru</h2>
+            <p>Kel. Jatibening Baru Kec. Pondogede Pemerintah Kota bekasi 17412</p>
         </div>
         <div>
             <button class="border-2 bg-white/20 backdrop-blur-lg px-5 py-1 rounded-md text-xl uppercase">
